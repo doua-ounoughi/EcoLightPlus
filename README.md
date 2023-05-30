@@ -23,54 +23,71 @@ Before running above codes, you may need to install following packages or enviro
 - Keras 2.2.0 and Tensorflow 1.9.0
 
 
+**Data**
 
+To get the intersection environment files:
+
+- Go under the installed SUMO folder `/usr/share/sumo/tools`
+- Run: `python osmWebWizard.py` a webwizard map would open on a browser.
+![WebWizard map](webwizard.png)
+- Select the intersection on the map and the parameter on the right about the type of vehicles, roads, etc.
+
+
+- Press `"Generate Scenario"`, a sumo GUI interface would pop-up to generate the traffic flow.
+- Now go to your Home directory, and copy the created folder (named with the current time) under `/data/one_run/m`
+
+The format of the noise prediction model inputs:
+
+- Columns: `[Timestamp	TN_Noise_Level_DB	IW_Temp_C	IW_Air_Pressure_mmHg	IW_Air_Humidity_Percent	IW_Wind_Speed_MH	IW_Rain_MMH	TT_P1_Current_Speed_Kmh	TT_P1_Freeflow_Speed_Kmh	TT_P1_Speed_Diff_Kmh	TT_P1_Current_Travel_Time_Sec	TT_P1_Freeflow_Travel_Time_Sec	TT_P1_Travel_Time_Diff_Sec	Hour	Minute	Day_Of_Month	Day_Of_Week	IW_Wind_Direction_Mark	IW_Weather_Cloudiness_Class	IW_Sunrise_Hour	IW_Sunrise_Minute	IW_Sunset_Hour	IW_Sunset_Minute	TT_P1_Road_Type_Class	TT_P2_Road_Type_Class	TT_P1_Is_Road_Closed	TT_P2_Is_Road_Closed	car	motorbike	bus	truck]`
+
+- Frequency: 1 minute
 
 
 **Files in the folder**
 
 The files are functioning like this:
 
-- EcoLight+.ipynb
+- `EcoLight+.ipynb`
 
   The experiments notebook.
 
-- run.py
+- `run.py`
 
   Load the experiment setting, and call traffic_light_agent.
 
-- traffic_light_dqn.py
+- `traffic_light_dqn.py`
 
   Simulate the reinforcement learning agent. This file simulates the timeline, get current state from sumo_agent, get current state from sumo_agent and call the agent to make decision.
 
-- sumo_agent.py
+- `sumo_agent.py`
 
   Interact with map_computor to get state, reward from the map_computor, and convey action to map_computor.
 
-- map_computor.py
+- `map_computor.py`
 
   Read data from SUMO and operate SUMO.
 
-- agent.py
+- `agent.py`
 
   Abstract class of agent.
 
-- network_agent.py
+- `network_agent.py`
 
   Abstract class of neural network based agent.
 
-- dueling_agent.py
+- `dueling_agent.py`
 
   Class of our method.
 
-- conf/
+- `conf/`
 
   Configuration files.
 
-- data/
+- `data/`
 
   Traffic flow files. The intersection is connected with four road segments of 300-meters long.
 
-- OHANA.py
+- `OHANA.py`
 
   The noise prediction model class file.
 
